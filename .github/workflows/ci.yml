@@ -1,0 +1,42 @@
+name: Foundry CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  foundry-pipeline:
+    name: Run Foundry Test Suite
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: latest
+
+      - name: Run Forge Build
+        run: forge build
+
+      - name: Run Forge Tests
+        run: forge test --gas-report
+
+      - name: Generate Docs
+        run: forge doc --build
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: forge-out
+          path: |
+            out/
+            doc/
