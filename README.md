@@ -1,5 +1,12 @@
 # 🛠️ Boomchainlabs Registry
 
+[![CI](https://github.com/Boomchainlab/boomchainlabs-registry/actions/workflows/ci-deploy.yml/badge.svg)](https://github.com/Boomchainlab/boomchainlabs-registry/actions/workflows/ci-deploy.yml)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Solidity Version](https://img.shields.io/badge/Solidity-0.8.20-blue.svg)](https://soliditylang.org/)
+[![Docs](https://img.shields.io/badge/docs-view-blue)](https://github.com/Boomchainlab/boomchainlabs-registry#documentation)
+
+> A decentralized registry system enabling smart contract discoverability, governance, and modular deployments — maintained by Boomchainlab.
 ![Build](https://img.shields.io/github/actions/workflow/status/Boomchainlab/boomchainlabs-registry/ci-deploy.yml?branch=main)
 ![License](https://img.shields.io/github/license/Boomchainlab/boomchainlabs-registry)
 ![Solidity](https://img.shields.io/badge/solidity-0.8.20-blue.svg)
@@ -104,10 +111,6 @@ We welcome contributions!
 git checkout -b feature/<name>
 git commit -m "feat: add something"
 git push origin feature/<name>
-🛡 License
-
-MIT License © Boomchainlab
----
 
 ### ✅ Next Steps
 
