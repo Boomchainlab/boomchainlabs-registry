@@ -46,146 +46,62 @@ contract Registry {
     }
 }
 
-## 🧱 Repository Structure
+🚀 Getting Started
 
-```bash
-boomchainlabs-registry/
-├── src/                    # Solidity source contracts
-│   └── Registry.sol
-├── script/                 # Foundry deployment scripts
-│   └── Deploy.s.sol
-├── test/                   # Forge test cases
-│   └── Registry.t.sol
-├── .github/workflows/      # CI pipeline config
-│   └── ci-deploy.yml
-├── foundry.toml            # Foundry project configuration
-└── README.md
-🛠 Prerequisites
-
-Before using this repository, ensure the following are installed:
+🧰 Prerequisites
 	•	Foundry
-	•	GitHub CLI or GitHub PAT with repo permissions
-	•	An RPC endpoint (e.g., Alchemy, Infura, QuickNode)
-	•	Optional: Etherscan API key for contract verification
-
-⸻
-
-🧪 Run Tests Locally
-
-Clone and test locally:
+	•	GitHub secrets set:
+	•	PRIVATE_KEY
+	•	RPC_URL
+	•	ETHERSCAN_API_KEY (optional)
+🔧 Install
 git clone https://github.com/Boomchainlab/boomchainlabs-registry.git
 cd boomchainlabs-registry
-foundryup
 forge install
+
+🔨 Build & Test
 forge build
 forge test --gas-report
-🚀 Deploy to Blockchain
-
-To deploy on a target network with verification:
-forge script script/Deploy.s.sol:DeployRegistry \
+🛠 Deployment
+To deploy via the CI pipeline or locally
+forge script script/DeployRegistry.s.sol:DeployRegistry \
   --rpc-url $RPC_URL \
+  --private-key $PRIVATE_KEY \
   --broadcast \
   --verify \
-  --etherscan-api-key $ETHERSCAN_API_KEY
-🔁 CI/CD Workflow
+  --etherscan-api-key $ETHERSCAN_API_KEY \
+  --chain-id 8453
 
-On every push to main, the GitHub Actions workflow:
-	•	✅ Builds with Foundry
-	•	✅ Runs full unit tests
-	•	✅ Broadcasts and verifies the deployment (when configured)
-	•	✅ Generates a gas usage report
+🧪 CI/CD
 
-📄 See: .github/workflows/ci-deploy.yml
-
-🔍 Core Contract
-
-Registry.sol
-contract Registry {
-    mapping(bytes32 => address) public registeredContracts;
-
-    function register(bytes32 name, address contractAddress) external {
-        registeredContracts[name] = contractAddress;
-    }
-
-    function get(bytes32 name) external view returns (address) {
-        return registeredContracts[name];
-    }
-}
-📦 Use Cases
-	•	🌐 Publicly queryable contract registry
-	•	🔐 Modular upgrades with proxy pattern
-	•	🪄 Interface registration and discovery
-	•	📘 DAO plugin architecture
+This repository uses GitHub Actions with a ci-deploy.yml workflow to:
+	•	✅ Run forge test and gas reports
+	•	🔁 Broadcast to Base or other EVM chains
+	•	🔎 Verify contracts on Etherscan
 
 ⸻
 
-🧠 Roadmap
-	•	IPFS metadata + SHA validation support
-	•	Multichain deployment (Base, Optimism, Arbitrum)
-	•	zkSync, Starknet adapters
-	•	Role-based access + DAO registry
-	•	Real-time GitHub webhook integration
+📄 License
+
+This project is licensed under the MIT License.
 
 ⸻
 
-🤝 Contribution
+🧭 Documentation
 
-We welcome contributions!
-# Fork → Feature → PR
-git checkout -b feature/<name>
-git commit -m "feat: add something"
-git push origin feature/<name>
+Explore full documentation inside the docs/ folder or directly from the source files.
 
-### ✅ Next Steps
+⸻
 
-To activate this:
+🙌 Contribute
 
-1. Save as `README.md` in your root directory
-2. Run:
+Pull requests and forks are welcome. Please submit a GitHub Issue to propose major changes.
 
-```bash
-git add README.md
-git commit -m "docs: add complete project README"
-git push origin main
+⸻
 
-✅ 1. CONTRIBUTING.md
-# Contributing to Boomchainlabs Registry
+✨ Powered By
+	•	Foundry
+	•	GitHub Actions
+	•	Base
 
-We welcome all contributions — from fixes and documentation updates to new modules and ideas!
-
----
-
-## 🧱 Local Setup
-
-1. **Clone the repo**
-   ```bash
-   git clone https://github.com/Boomchainlab/boomchainlabs-registry.git
-   cd boomchainlabs-registry
-   foundryup
-   forge install
-	2.	Run tests
-forge test --gas-report
-
-🧪 Contribution Guidelines
-	•	Branch from main:
-git checkout -b feature/<name>
-	•	Follow conventional commits:
-git commit -m "feat(registry): added registry logic"
-	•	Create a pull request to main.
-📄 Commit Format
-Type
-Description
-feat
-A new feature
-fix
-A bug fix
-docs
-Documentation only
-style
-Formatting, no logic
-refactor
-Code restructure
-test
-Adding missing tests
-chore
-Build system, CI config
+Build decentralized registries the modular way — Boomchainlab 🚀
