@@ -1,26 +1,50 @@
-# 🛠️ Boomchainlabs Registry
+# 🔗 Boomchainlabs Registry
 
 [![CI](https://github.com/Boomchainlab/boomchainlabs-registry/actions/workflows/ci-deploy.yml/badge.svg)](https://github.com/Boomchainlab/boomchainlabs-registry/actions/workflows/ci-deploy.yml)
-
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Solidity Version](https://img.shields.io/badge/Solidity-0.8.20-blue.svg)](https://soliditylang.org/)
 [![Docs](https://img.shields.io/badge/docs-view-blue)](https://github.com/Boomchainlab/boomchainlabs-registry#documentation)
-
-> A decentralized registry system enabling smart contract discoverability, governance, and modular deployments — maintained by Boomchainlab.
 ![Build](https://img.shields.io/github/actions/workflow/status/Boomchainlab/boomchainlabs-registry/ci-deploy.yml?branch=main)
-![License](https://img.shields.io/github/license/Boomchainlab/boomchainlabs-registry)
-![Solidity](https://img.shields.io/badge/solidity-0.8.20-blue.svg)
 ![Powered by Foundry](https://img.shields.io/badge/Foundry-tested-blue)
 
-> A decentralized, modular, and upgradeable smart contract registry system built by [Boomchainlab](https://github.com/Boomchainlab).
+> A decentralized, modular, and upgradeable smart contract registry maintained by [Boomchainlab](https://github.com/Boomchainlab).
 
 ---
 
-## 🚀 Overview
+## 📘 Overview
 
-The **Boomchainlabs Registry** provides a standardized, upgrade-friendly on-chain registry for smart contracts, metadata modules, and verifiable deployments. It is optimized for multi-chain deployments, CI-based automation, and developer-friendly discovery.
+The **Boomchainlabs Registry** provides an on-chain mapping for smart contract discoverability across modules, systems, and deployments. It supports plug-and-play registry patterns for multi-chain apps, proxies, governance modules, and DAO architectures.
 
 ---
+
+## 📦 Features
+
+- 🔐 Secure registration of contract addresses
+- 📡 On-chain discovery by contract name (hash-based)
+- 🔄 Upgrade-friendly and DAO-integrable
+- ⚙️ Built with [Foundry](https://book.getfoundry.sh/) and CI-ready
+- ✅ Verified with Etherscan (if secrets are provided)
+
+---
+
+## 📁 Contract Structure
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract Registry {
+    mapping(bytes32 => address) private _registry;
+
+    function register(bytes32 name, address addr) external {
+        require(addr != address(0), "Invalid address");
+        _registry[name] = addr;
+    }
+
+    function get(bytes32 name) external view returns (address) {
+        return _registry[name];
+    }
+}
 
 ## 🧱 Repository Structure
 
