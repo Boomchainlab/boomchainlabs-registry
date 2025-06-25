@@ -1,0 +1,19 @@
+{
+  "name": "Boomchainlabs Registry",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/foundry-rs/devcontainer-feature:foundry": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "juanblanco.solidity",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  },
+  "postCreateCommand": "forge --version && echo 'Ready to build and test 🚀'"
+}
