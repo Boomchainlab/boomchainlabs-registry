@@ -11,9 +11,12 @@
       "extensions": [
         "juanblanco.solidity",
         "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode",
+        "rust-lang.rust-analyzer",
+        "tamasfe.even-better-toml"
       ]
     }
   },
-  "postCreateCommand": "forge --version && echo 'Ready to build and test 🚀'"
+  "postCreateCommand": "forge --version && echo '✅ Foundry ready. Start coding!'",
+  "remoteUser": "root"
 }
