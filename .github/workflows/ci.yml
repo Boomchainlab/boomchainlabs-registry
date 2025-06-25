@@ -1,42 +1,47 @@
-name: Foundry CI/CD
+name: Foundry CI & Deploy
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    branches: [main]
+    branches:
+      - main
+
+env:
+  CHAIN_ID: 8453 # Base Mainnet (adjust as needed)
+  RPC_URL: ${{ secrets.RPC_URL }}
+  ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+  PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+  DEPLOY_TAG: v1.0.0
+  REGISTRY_NAME: boomchainlabs-registry
 
 jobs:
-  foundry-pipeline:
-    name: Run Foundry Test Suite
+  build-and-deploy:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: read
-      id-token: write
-
     steps:
-      - name: Checkout Repository
+      - name: 📥 Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Foundry
+      - name: 🛠 Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
         with:
           version: latest
 
-      - name: Run Forge Build
-        run: forge build
-
-      - name: Run Forge Tests
+      - name: 🔎 Run Tests with Gas Report
         run: forge test --gas-report
 
-      - name: Generate Docs
-        run: forge doc --build
+      - name: 🚀 Deploy Registry Contract (if secrets are set)
+        if: ${{ secrets.PRIVATE_KEY != '' && secrets.RPC_URL != '' }}
+        run: |
+          forge script script/DeployRegistry.s.sol:DeployRegistry \
+            --rpc-url $RPC_URL \
+            --private-key $PRIVATE_KEY \
+            --broadcast \
+            --verify \
+            --etherscan-api-key $ETHERSCAN_API_KEY \
+            --chain-id $CHAIN_ID
 
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: forge-out
-          path: |
-            out/
-            doc/
+      - name: ✅ Complete
+        run: echo "Deployment pipeline executed successfully ✅"
