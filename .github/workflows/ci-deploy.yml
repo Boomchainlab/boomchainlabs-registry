@@ -1,0 +1,38 @@
+name: Deploy & Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: latest
+
+      - name: Build Contracts
+        run: forge build
+
+      - name: Run Tests
+        run: forge test --gas-report
+
+      - name: Deploy Registry (Optional)
+        if: github.ref == 'refs/heads/main'
+        env:
+          RPC_URL: ${{ secrets.RPC_URL }}
+          ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+        run: |
+          forge script script/Deploy.s.sol:DeployRegistry \
+            --rpc-url $RPC_URL \
+            --broadcast \
+            --verify \
+            --etherscan-api-key $ETHERSCAN_API_KEY
