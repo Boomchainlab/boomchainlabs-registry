@@ -3,7 +3,7 @@
   "image": "mcr.microsoft.com/devcontainers/universal:3",
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers/features/node:2": {},
     "ghcr.io/foundry-rs/devcontainer-feature:foundry": {}
   },
   "customizations": {
